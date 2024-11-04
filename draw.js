@@ -1,8 +1,8 @@
-const canvas = document.getElementById('paintCanvas');
-const ctx = canvas.getContext('2d');
-const colorPicker = document.getElementById('colorPicker');
-const brushSize = document.getElementById('brushSize');
-const clearCanvas = document.getElementById('clearCanvas');
+let canvas = document.getElementById('paintCanvas');
+let ctx = canvas.getContext('2d');
+let colorPicker = document.getElementById('colorPicker');
+let brushSize = document.getElementById('brushSize');
+let clearCanvas = document.getElementById('clearCanvas');
 
 let painting = false;
 
@@ -24,10 +24,10 @@ function draw(e) {
   ctx.strokeStyle = colorPicker.value;
 
   // Adjust the coordinates to match the canvas size
-  ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+  ctx.lineTo(e.clientX - canvas.offsetLeft-50, e.clientY - canvas.offsetTop-50); //este -50 é pela border
   ctx.stroke();
   ctx.beginPath();
-  ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+  ctx.moveTo(e.clientX - canvas.offsetLeft-50, e.clientY - canvas.offsetTop-50);
 }
 
 // Event listeners for drawing on the canvas

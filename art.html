@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Art Institute of Chicago Artworks</title>
+
+    <link rel="stylesheet" type="text/css" href="art.css" />
+    <link rel="stylesheet" type="text/css" href="common.css" />
+  </head>
+
+  <body>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="draw.html">Draw</a>
+    </nav>
+
+    <h1> Random artwork from the Art Institute of Chicago!</h1>
+    <p>  Place your mouse in the middle of your screen to uncover it!</p>
+
+    <div id="artworks"><!--voltar aqui pra ver se id ou clawss-->
+      <!-- aqui têm que vir as artworks-quantas?ainda n sei ja se ve e maybe random??? talvez random noutra pag?? ok 1 random aqui--> 
+    </div>
+
+    <script>
+      //tipo assignment 1 mas no client side pq epa so 1 img
+      async function main() {
+        let response = await fetch("https://api.artic.edu/api/v1/artworks");
+        let artworks = await response.json();
+
+        let artworksWithImages = artworks.data.filter((art) => art.image_id); //ver este melhor pq algo n slay
+
+        // Get the container to display artwork
+        let artworkContainer = document.getElementById("artworks");
+
+        // RANDOM weee algo da problemas pq as vezes n aparece nada anyway voltar
+        let randomArt =
+          artworksWithImages[Math.floor(Math.random() * artworks.data.length)];
+        //let art = artworks.data[randomIndex];
+
+        artworkContainer.innerHTML = `
+                    <img src="https://www.artic.edu/iiif/2/${randomArt.image_id}/full/843,/0/default.jpg" alt="${randomArt.title}" />
+                    <h2>${randomArt.title}</h2>
+                    <p>Artist: ${randomArt.artist_title || "Unknown"}</p>
+                    <p>Dimensions: ${randomArt.dimensions}</p>
+                    <p>Description: ${randomArt.thumbnail.alt_text}</p>
+                `;
+
+        //isto seria para aparerem todos e so alguma info...mas vou fazer so um random a cada refresh
+        /*
+                // Generate HTML for each artwork and add it to the container
+                artworks.data.forEach((art) => {
+                    let artworkDiv = document.createElement("div");
+                    artworkDiv.className = "artwork";
+
+                    //la no site do api diz isto pra imagens ent siga https://www.artic.edu/iiif/2/{identifier}/full/843,/0/default.jpg
+                    artworkDiv.innerHTML = `
+                        <h2>${art.title}</h2>
+                        <p>Artist: ${art.artist_title || "Unknown"}</p>
+                        <img src="https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg" alt="${art.title}" />
+                    `;
+
+                    artworkContainer.appendChild(artworkDiv);
+
+                  
+                });  */
+      }
+
+      main();
+    </script>
+  </body>
+</html>
