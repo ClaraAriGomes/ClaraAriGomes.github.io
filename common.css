@@ -1,6 +1,7 @@
 html {
     background: rgb(20, 20, 20);
-    font-family: Courier, Arial, serif;
+    font-family: "Courier";
+    overflow-x:hidden
 }
 
 h1, h2, p, a{
