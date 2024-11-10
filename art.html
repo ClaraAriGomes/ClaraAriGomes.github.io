@@ -3,24 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Art Institute of Chicago Artworks</title>
+    <title>Artworks</title>
 
-    <link rel="stylesheet" type="text/css" href="art.css" />
     <link rel="stylesheet" type="text/css" href="common.css" />
+    <link rel="stylesheet" type="text/css" href="art.css" />
   </head>
 
   <body>
     <nav>
       <a href="index.html">Home</a>
-      <a href="draw.html">Draw</a>
+      <a href="draw.html">Draw something!</a>
     </nav>
 
-    <h1> Random artwork from the Art Institute of Chicago!</h1>
-    <p>  Place your mouse in the middle of your screen to uncover it!</p>
-
-    <div id="artworks"><!--voltar aqui pra ver se id ou clawss-->
+    <header>
+      <h1>Random artwork from the Art Institute of Chicago!</h1>
+      <p>Place your cursor in the middle of your screen to uncover it!</p>
+    </header>
+    <div id="artworks"> <!--voltar aqui pra ver se id ou clawss-->
       <!-- aqui têm que vir as artworks-quantas?ainda n sei ja se ve e maybe random??? talvez random noutra pag?? ok 1 random aqui--> 
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script>
       //tipo assignment 1 mas no client side pq epa so 1 img
@@ -29,41 +44,43 @@
         let artworks = await response.json();
 
         let artworksWithImages = artworks.data.filter((art) => art.image_id); //ver este melhor pq algo n slay
-
+  
         // Get the container to display artwork
         let artworkContainer = document.getElementById("artworks");
 
         // RANDOM weee algo da problemas pq as vezes n aparece nada anyway voltar
-        let randomArt =
-          artworksWithImages[Math.floor(Math.random() * artworks.data.length)];
-        //let art = artworks.data[randomIndex];
+        let randomArt = artworksWithImages[Math.floor(Math.random() * artworks.data.length)];
 
-        artworkContainer.innerHTML = `
-                    <img src="https://www.artic.edu/iiif/2/${randomArt.image_id}/full/843,/0/default.jpg" alt="${randomArt.title}" />
-                    <h2>${randomArt.title}</h2>
-                    <p>Artist: ${randomArt.artist_title || "Unknown"}</p>
-                    <p>Dimensions: ${randomArt.dimensions}</p>
-                    <p>Description: ${randomArt.thumbnail.alt_text}</p>
-                `;
+        // Create an image element for the artwork
+        let artworkImage = document.createElement("img");
+        artworkImage.src = `https://www.artic.edu/iiif/2/${randomArt.image_id}/full/843,/0/default.jpg`;
 
-        //isto seria para aparerem todos e so alguma info...mas vou fazer so um random a cada refresh
-        /*
-                // Generate HTML for each artwork and add it to the container
-                artworks.data.forEach((art) => {
-                    let artworkDiv = document.createElement("div");
-                    artworkDiv.className = "artwork";
+        //para quanod clicarmos na imagem ir pro site official slay
+        artworkImage.addEventListener("click", function() {
+          let link = `https://www.artic.edu/artworks/${randomArt.id}`;
+          window.open(link); // abrir numa outra tab yeet
+        });
 
-                    //la no site do api diz isto pra imagens ent siga https://www.artic.edu/iiif/2/{identifier}/full/843,/0/default.jpg
-                    artworkDiv.innerHTML = `
-                        <h2>${art.title}</h2>
-                        <p>Artist: ${art.artist_title || "Unknown"}</p>
-                        <img src="https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg" alt="${art.title}" />
-                    `;
+        artworkContainer.appendChild(artworkImage);
 
-                    artworkContainer.appendChild(artworkDiv);
 
-                  
-                });  */
+        let title = document.createElement("h2");
+        title.innerHTML = randomArt.title; 
+        artworkContainer.appendChild(title);
+
+        let artist = document.createElement("p");
+        artist.innerHTML = `Artist: ${randomArt.artist_title || "Unknown"}`; // Same for the other elements
+        artworkContainer.appendChild(artist);
+
+
+        let dimensions = document.createElement("p");
+        dimensions.innerHTML = `Dimensions: ${randomArt.dimensions}`;
+        artworkContainer.appendChild(dimensions);
+
+
+        let description = document.createElement("p");
+        description.innerHTML = `Description: ${randomArt.thumbnail.alt_text}`;
+        artworkContainer.appendChild(description);
       }
 
       main();

@@ -1,41 +1,43 @@
 let canvas = document.getElementById('paintCanvas');
-let ctx = canvas.getContext('2d');
 let colorPicker = document.getElementById('colorPicker');
 let brushSize = document.getElementById('brushSize');
 let clearCanvas = document.getElementById('clearCanvas');
+let context = canvas.getContext('2d');
 
 let painting = false;
 
-function startPosition(e) {
+function startPosition(dot) { //funcao para comecar a desenhar quando eu clicar
   painting = true;
-  draw(e);
+  draw(dot);
 }
 
-function endPosition() {
+function endPosition() { //funcao para eu parar de desenhar quando deixar o click
   painting = false;
-  ctx.beginPath(); // Ends the path, so lines aren’t continuous
+  context.beginPath();
+}
+ 
+function movingPosition(dot) { //funcao para "desenhar" enquanto o rato move
+  if (painting == false){
+    return;
+  }
+
+  context.lineWidth = brushSize.value;
+  context.lineCap = 'round';
+  context.strokeStyle = colorPicker.value;
+
+
+  context.lineTo(dot.clientX - canvas.offsetLeft-50, dot.clientY - canvas.offsetTop-50); //este -50 é pela border
+  context.stroke();
+  context.beginPath();
+  context.moveTo(dot.clientX - canvas.offsetLeft-50, dot.clientY - canvas.offsetTop-50);
 }
 
-function draw(e) {
-  if (!painting) return;
-
-  ctx.lineWidth = brushSize.value;
-  ctx.lineCap = 'round';
-  ctx.strokeStyle = colorPicker.value;
-
-  // Adjust the coordinates to match the canvas size
-  ctx.lineTo(e.clientX - canvas.offsetLeft-50, e.clientY - canvas.offsetTop-50); //este -50 é pela border
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(e.clientX - canvas.offsetLeft-50, e.clientY - canvas.offsetTop-50);
-}
-
-// Event listeners for drawing on the canvas
+//todos os event listeners ne
 canvas.addEventListener('mousedown', startPosition);
 canvas.addEventListener('mouseup', endPosition);
-canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mousemove', movingPosition);
 
-// Clear canvas button
+// e aqui so usar o metodo pra limpar whoosh
 clearCanvas.addEventListener('click', () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  context.clearRect(0, 0, canvas.width, canvas.height);
 });

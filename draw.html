@@ -3,31 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paint Your Masterpiece</title>
-  <link rel="stylesheet" type="text/css" href="draw.css">
+  <title>Masterpiece Creator</title>
+
   <link rel="stylesheet" type="text/css" href="common.css" />
+  <link rel="stylesheet" type="text/css" href="draw.css">
 </head>
 <body>
-    <header>
-
-    </header>
-
     <nav>
       <a href="index.html">Home</a>
-      <a href="art.html">Art</a>
+      <a href="art.html">Artworks</a>
     </nav>
 
+  <h1> Create your own <em>Masterpiece!</em> </h1>
 
-  <h1>Paint Your Own Masterpiece</h1>
   <div class="controls">
     <label for="colorPicker">Brush Color:</label>
     <input type="color" id="colorPicker">
     <label for="brushSize">Brush Size:</label>
-    <input type="range" id="brushSize" min="1" max="70" value="5">
+    <input type="range" id="brushSize" min="5" max="100">
     <button id="clearCanvas">Clear Canvas</button>
   </div>
+
   <canvas id="paintCanvas" width="800" height="300"></canvas>
 
+  <button class="randomBackground"> Click me!</button>
+
   <script src="draw.js"></script>
+  <script src="randomBack.js"></script>
+
 </body>
 </html>
