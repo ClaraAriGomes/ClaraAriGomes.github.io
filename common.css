@@ -4,7 +4,7 @@
 
 html {
     background: rgb(20, 20, 20);
-    font-family: "Helvetica"; /*por substituta*/
+    font-family: Mona Sans, Helvetica, sans-serif;
     overflow-x:hidden
 }
 
@@ -15,11 +15,10 @@ h1, h2, p, a{
 a {
     position: relative;
     font-size: 2vw;
-  
     text-decoration: none;
   }
   
-  a::after {
+a::after {
     content: "";
     background: white;
   
@@ -31,13 +30,13 @@ a {
     width: 40%;
   
     transition: width 0.3s ease;
-  }
+}
   
-  a:hover::after {
+a:hover::after {
     width: 90%;
-  }
+}
   
-  nav{
+nav{
     position: fixed;
     width: 100vw;
   
@@ -45,9 +44,9 @@ a {
     justify-content: center;
     padding: 2vh 0 2vh 0;
     gap: 50%;
-  }
+}
 
-  .randomBackground {
+.randomBackground {
     background-color: white;
     color:rgb(21, 13, 61);
     font-size: 100%;
@@ -58,9 +57,9 @@ a {
     text-decoration: none;
     transition: width 0.5s ease;
     margin-bottom: 10vh;
-  }
+}
   
-  .randomBackground:hover{
+.randomBackground:hover{
     width:100vw;
     transition: width 0.3s ease;
-  }
+ }

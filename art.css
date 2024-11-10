@@ -1,4 +1,7 @@
 body{
+    height:100vh;
+    overflow-y:hidden;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,7 +9,8 @@ body{
 }
 
 nav{
-    position: static ;
+    position: static;
+    margin-top: -20vh;
 }
 
 header{
@@ -20,11 +24,6 @@ header h1 {
     padding-top: 5vh;
 }
 
-header p{
-    padding-bottom: 5vh;
-}
-
-
 #artworks{
     height:50vh;
     width:30vw;
@@ -34,27 +33,20 @@ header p{
     align-items: center;
 }
 
-
 #artworks img {
     height: 50vh;
     width: auto;
     opacity: 0;
-    transition: opacity 1s ease-in-out; /* Smooth fade-in and fade-out */
+    transition: opacity 1s ease-in-out;
     padding-bottom: 5vh;
 }
 
 #artworks:hover img {
-    opacity: 1; /* Fade in on hover */
+    opacity: 1; 
 }
-
 
 #artworks p{
    text-align: left; 
    align-self: flex-start;
 }
-
-
-
-/*vamos por uma animacao hover pra dar uncover da imagem slay*/
-
   

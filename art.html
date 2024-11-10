@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artworks</title>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mona+Sans"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Helvetica">
+
     <link rel="stylesheet" type="text/css" href="common.css" />
     <link rel="stylesheet" type="text/css" href="art.css" />
   </head>
@@ -19,71 +22,49 @@
       <h1>Random artwork from the Art Institute of Chicago!</h1>
       <p>Place your cursor in the middle of your screen to uncover it!</p>
     </header>
-    <div id="artworks"> <!--voltar aqui pra ver se id ou clawss-->
-      <!-- aqui têm que vir as artworks-quantas?ainda n sei ja se ve e maybe random??? talvez random noutra pag?? ok 1 random aqui--> 
+
+    <div id="artworks">
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script>
-      //tipo assignment 1 mas no client side pq epa so 1 img
       async function main() {
         let response = await fetch("https://api.artic.edu/api/v1/artworks");
         let artworks = await response.json();
 
-        let artworksWithImages = artworks.data.filter((art) => art.image_id); //ver este melhor pq algo n slay
-  
-        // Get the container to display artwork
+        let artworksWithImages = artworks.data.filter((art) => art.image_id);
+
         let artworkContainer = document.getElementById("artworks");
 
-        // RANDOM weee algo da problemas pq as vezes n aparece nada anyway voltar
         let randomArt = artworksWithImages[Math.floor(Math.random() * artworks.data.length)];
 
-        // Create an image element for the artwork
         let artworkImage = document.createElement("img");
         artworkImage.src = `https://www.artic.edu/iiif/2/${randomArt.image_id}/full/843,/0/default.jpg`;
 
-        //para quanod clicarmos na imagem ir pro site official slay
         artworkImage.addEventListener("click", function() {
           let link = `https://www.artic.edu/artworks/${randomArt.id}`;
-          window.open(link); // abrir numa outra tab yeet
+          window.open(link);
         });
 
         artworkContainer.appendChild(artworkImage);
-
 
         let title = document.createElement("h2");
         title.innerHTML = randomArt.title; 
         artworkContainer.appendChild(title);
 
         let artist = document.createElement("p");
-        artist.innerHTML = `Artist: ${randomArt.artist_title || "Unknown"}`; // Same for the other elements
+        artist.innerHTML = `Artist: ${randomArt.artist_title || "Unknown"}`;
         artworkContainer.appendChild(artist);
-
 
         let dimensions = document.createElement("p");
         dimensions.innerHTML = `Dimensions: ${randomArt.dimensions}`;
         artworkContainer.appendChild(dimensions);
 
-
         let description = document.createElement("p");
         description.innerHTML = `Description: ${randomArt.thumbnail.alt_text}`;
         artworkContainer.appendChild(description);
       }
-
       main();
     </script>
+    <script src="randomBack.js"></script>
   </body>
 </html>

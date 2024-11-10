@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Masterpiece Creator</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterpiece Creator</title>
 
-  <link rel="stylesheet" type="text/css" href="common.css" />
-  <link rel="stylesheet" type="text/css" href="draw.css">
-</head>
-<body>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mona+Sans"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Helvetica"> 
+
+    <link rel="stylesheet" type="text/css" href="common.css" />
+    <link rel="stylesheet" type="text/css" href="draw.css">
+  </head>
+
+  <body>
     <nav>
       <a href="index.html">Home</a>
       <a href="art.html">Artworks</a>
     </nav>
 
-  <h1> Create your own <em>Masterpiece!</em> </h1>
+    <h1> Create your own <em>Masterpiece!</em> </h1>
 
-  <div class="controls">
-    <label for="colorPicker">Brush Color:</label>
-    <input type="color" id="colorPicker">
-    <label for="brushSize">Brush Size:</label>
-    <input type="range" id="brushSize" min="5" max="100">
-    <button id="clearCanvas">Clear Canvas</button>
-  </div>
+    <div class="controls">
+      <label for="colorPicker">Brush Color:</label>
+      <input type="color" id="colorPicker">
+      <label for="brushSize">Brush Size:</label>
+      <input type="range" id="brushSize" min="5" max="100">
+      <button id="clearCanvas">Clear Canvas</button>
+    </div>
 
-  <canvas id="paintCanvas" width="800" height="300"></canvas>
+    <canvas id="paintCanvas" width="800" height="300"></canvas>
 
-  <button class="randomBackground"> Click me!</button>
+    <button class="randomBackground"> Click me!</button>
 
-  <script src="draw.js"></script>
-  <script src="randomBack.js"></script>
-
-</body>
+    <script src="draw.js"></script>
+    <script src="randomBack.js"></script>
+  </body>
 </html>

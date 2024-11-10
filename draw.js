@@ -6,17 +6,17 @@ let context = canvas.getContext('2d');
 
 let painting = false;
 
-function startPosition(dot) { //funcao para comecar a desenhar quando eu clicar
+function startPosition(dot) { 
   painting = true;
   draw(dot);
 }
 
-function endPosition() { //funcao para eu parar de desenhar quando deixar o click
+function endPosition() { 
   painting = false;
   context.beginPath();
 }
  
-function movingPosition(dot) { //funcao para "desenhar" enquanto o rato move
+function movingPosition(dot) {
   if (painting == false){
     return;
   }
@@ -25,19 +25,16 @@ function movingPosition(dot) { //funcao para "desenhar" enquanto o rato move
   context.lineCap = 'round';
   context.strokeStyle = colorPicker.value;
 
-
-  context.lineTo(dot.clientX - canvas.offsetLeft-50, dot.clientY - canvas.offsetTop-50); //este -50 é pela border
+  context.lineTo(dot.clientX - canvas.offsetLeft-50, dot.clientY - canvas.offsetTop-50); 
   context.stroke();
   context.beginPath();
   context.moveTo(dot.clientX - canvas.offsetLeft-50, dot.clientY - canvas.offsetTop-50);
 }
 
-//todos os event listeners ne
 canvas.addEventListener('mousedown', startPosition);
 canvas.addEventListener('mouseup', endPosition);
 canvas.addEventListener('mousemove', movingPosition);
 
-// e aqui so usar o metodo pra limpar whoosh
 clearCanvas.addEventListener('click', () => {
   context.clearRect(0, 0, canvas.width, canvas.height);
 });
